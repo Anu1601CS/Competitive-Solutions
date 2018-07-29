@@ -8,13 +8,7 @@ int main()
 
   cin>>x1>>v1>>x2>>v2;
 
-  if (x2 > x1 && v2 > v1)
-  {
-    cout<<"NO";
-    return 0;
-  }
-
-  if (x1 > x2 && v1 > v2)
+  if (v2 > v1)
   {
     cout<<"NO";
     return 0;
