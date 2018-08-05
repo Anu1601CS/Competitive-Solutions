@@ -1,7 +1,7 @@
 //Name:Anurag
 //Roll no:1601CS05
 
-#include<stdio.h>    //decleration of all header files 
+#include<stdio.h>    //decleration of all header files
 #include<stdlib.h>
 
 int size[500]={0};  //global variables
@@ -16,7 +16,7 @@ int main()
 {
 
 	int i,n,m;
-	
+
 	printf("Enter the number of Players: ");
 	scanf("%d",&n);
 
@@ -27,20 +27,23 @@ int main()
 	printf("Enter the edge pairs one by one: \n");
 	int u,v;
 
-        for(i=1;i<=n;i++)   //initilization of color
-	{color[i]=-1;}
+	//initilization of color
+	for(i=1;i<=n;i++)
+	{
+		color[i]=-1;
+	}
 
-      	//adjency list
+	//adjency list
 	for(i=0;i<m;i++)
 	{
 		  scanf("%d %d",&u,&v);
-		 
+
 		  list[u][size[u]++]=v;
 		  list[v][size[v]++]=u;
 	}
 
 
-  for (i=1;i<=n;i++)   //caling dfs function 
+  for (i=1;i<=n;i++)   //caling dfs function
 	{
 		if (color[i] == -1)
 		{
@@ -55,9 +58,8 @@ int main()
 	}
 	else
 	{
-
-		
 		printf("Team 1: ");            //print team 1
+
 		for (i=1;i<=n;i++)
 		{
 			if (color[i]==0)
@@ -65,8 +67,10 @@ int main()
 				printf(" %d ",i);
 			}
 		}
+
 		printf("\n");
 		printf("Team 2: ");                //print team 2
+
 		for (i=1;i<=n;i++)
 		{
 			if (color[i]==1)
@@ -76,9 +80,9 @@ int main()
 		}
 		printf("\n");
 	}
-	
 
-	
+
+
 	return 0;
 }
 
@@ -87,17 +91,17 @@ int main()
 void dfs(int u,int a)
 {
   int i,next;
-      
+
  if(check!=1)
   {
 	return;
   }
     color[u]=a;
-   
+
     for (i=0;i<size[u];i++)
 	{
 	    next=list[u][i];
-		
+
 		if (color[next] == -1)
 		{  dfs(next,1-a);}
 		else
@@ -106,19 +110,6 @@ void dfs(int u,int a)
 				check=0;
 				return;
 			}
-		
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
