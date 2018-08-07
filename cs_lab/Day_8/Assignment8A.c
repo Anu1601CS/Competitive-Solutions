@@ -103,7 +103,9 @@ void dfs(int u,int a)
 	    next=list[u][i];
 
 		if (color[next] == -1)
-		{  dfs(next,1-a);}
+		{
+			dfs(next,1-a);
+		}
 		else
 			if(color[next]==a)
 			{
