@@ -21,7 +21,7 @@ int unionSet(int x, int y)
 {
   int xset = find(x);
   int yset = find(y);
-
+  
   parent[xset] = yset;
   return 1;
 }
