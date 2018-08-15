@@ -12,9 +12,7 @@ int main()
   int s[n];
 
   for(i=0;i<n;i++)
-  {
     cin>>s[i];
-  }
 
   cin>>d>>m;
 
@@ -24,14 +22,10 @@ int main()
     total = s[i];
 
     for(j=1; j<m; j++)
-    {
       total = total + s[i+j];
-    }
 
     if(total == d)
-    {
       ++count;
-    }
   }
 
   cout<<count;
