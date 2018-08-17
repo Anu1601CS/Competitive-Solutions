@@ -27,7 +27,6 @@ int main()
       while(*it<=score && it!=scores.end())
       {
         ++it;
-        ++it;
         --rank;
       }
 
