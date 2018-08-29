@@ -118,6 +118,6 @@ int main()
         }
       }
 
-cout<<"Max sum ="<<result->maxsum;
+cout<<result->maxsum;
 return 0;
 }
