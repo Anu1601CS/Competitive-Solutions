@@ -13,7 +13,6 @@ using namespace std;
 #define pb push_back
 #define fi first
 #define se second
-#define all(cc) (cc).begin(),(cc).end()
 
 typedef long long int lli;
 typedef pair<int,int> pii;
