@@ -73,12 +73,12 @@ void insert(int a)
   struct node *p = head;
   struct node *temp = (struct node*) malloc(sizeof(struct node));
   temp->data = a;
+  temp->left = NULL;
+  temp->right = NULL;
 
   if(head == NULL)
   {
     head = temp;
-    temp->left = NULL;
-    temp->right = NULL;
   }
   else
   {
