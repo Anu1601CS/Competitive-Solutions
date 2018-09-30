@@ -24,31 +24,33 @@ typedef vector<bool> vb;
 typedef vector<vector<int> > vvi;
 typedef vector<long long int> vlli;
 typedef vector<pair<int,int> > vpii;
-lli l,r,x,y;
-bool ft(lli a){
-	a=a*x;
-	if(a<=r && a>=l) return 1;
-	return 0;
-}
+
+bool myfunction (lli i,lli j) { return (i > j); }
+int sti (string s) { stringstream con(s); int x; con >> x; return x; }
 
 int main()
 {
   SYNC
 
-	lli n,i,a,max=0,ans;
-	lli arr[6]={0,0,0,0,0,0};
-	cin>>n;
-	for(i=1;i<=n;i++)
-	{
-		cin>>a;
-		arr[a] += 1;
-		if(max < arr[a])
-		{
-			max = arr[a];
-			ans = a;
-		}
-	}
+    lli n,i,a,max=0,ans;
+    lli arr[7]={0,0,0,0,0,0,0};
+    cin>>n;
 
-	cout<<ans;
+    for(i=0; i<n; i++)
+    {
+        cin>>a;
+        arr[a]++;
+    }
+
+    for(i=1; i<=5; i++)
+    {
+      if(max < arr[i])
+      {
+          max = arr[i];
+          ans = i;
+      }
+    }
+
+    cout<<ans;
 return 0;
 }
