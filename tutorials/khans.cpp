@@ -28,58 +28,68 @@ typedef vector<pair<int,int> > vpii;
 bool myfunction (lli i,lli j) { return (i > j); }
 int sti (string s) { stringstream con(s); int x; con >> x; return x; }
 
-stack<int>st;
-bool visited[105];
-
-int khans(vector<int>graph[], int v,int e)
+int khans(vector<int>graph[100],vector<int> in_degree,int v,int e)
 {
-  vector<int>indegree (v,0);
-
-  vector<int>::iterator it,it2;
-  for(int u=0;u<v;u++)
-    for(it=graph[u].begin();it!=graph[u].end();it++)
-        indegree[*it]++;
-
   queue<int> q;
-  for(int i = 0; i < v; i++)
-        if (indegree[i] == 0)
-            q.push(i);
+  for(int i=0;i<v;i++)
+  if(in_degree[i]==0)
+    q.push(i);
 
-  vector<int>result;
+  int count = 0;
 
+   queue<int>result;
   while(!q.empty())
   {
-    int u = q.front();
+    int top = q.front();
     q.pop();
-    result.push_back(u);
 
-    for(it2=graph[u].begin(); it2!= graph[u].end(); it2++)
-      if(--indegree[*it2] == 0 )
-        q.push(*it2);
+
+    result.push(top);
+    vector<int>::iterator it;
+
+    for(it = graph[top].begin(); it!= graph[top].end(); it++)
+    {
+      if (--in_degree[*it] == 0)
+               q.push(*it);
+    }
+
+    ++count;
   }
 
-  for(int i=0;i<result.size();i++)
-    cout<<result[i]<<" ";
+  if(count != v)
+  cout<<"not a DAC graph";
 
-  return 0;
+  while(!result.empty())
+  {
+    cout<<result.front()<<" ";
+    result.pop();
+  }
+
+
+return 0;
 }
 
 int main()
 {
   SYNC
 
-  int v,e,i,a,b;
-
+  int v,e;
   cin>>v>>e;
-  vector<int>graph[v];
+  int a,b;
+  vector<int>graph[100];
 
-  for(i=0;i<e;i++)
+  int indeg[v];
+
+  vector<int> in_degree(v, 0);
+
+  for(int i=0;i<v;i++)
   {
     cin>>a>>b;
     graph[a].push_back(b);
+    in_degree[b]++;
   }
 
-  khans(graph,v,e);
+  khans(graph,in_degree,v,e);
 
   return 0;
 }

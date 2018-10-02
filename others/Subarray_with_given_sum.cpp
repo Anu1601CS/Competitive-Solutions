@@ -31,28 +31,66 @@ int sti (string s) { stringstream con(s); int x; con >> x; return x; }
 int main()
 {
   SYNC
+  lli t,fla = 0;
+  cin>>t;
 
-  lli i,j,b,n,m;
-  cin>>b>>n>>m;
+  while(t>0)
+  {
+    lli n,s;
+    cin>>n>>s;
+    lli arr[n];
 
-  lli key[n],dri[m];
+    cin>>arr[0];
 
-  for(i=0;i<n;i++)
-  cin>>key[i];
-
-  for(i=0;i<m;i++)
-  cin>>dri[i];
-
-  lli max  = -1;
-
-  for(i=0;i<n;i++)
-    for(j=0;j<m;j++)
+    for(int i=1;i<n;i++)
     {
-      if(key[i]+dri[j] > max && key[i]+dri[j] <= b)
-      max = key[i]+dri[j];
+      cin>>arr[i];
+      arr[i] = arr[i] + arr[i-1];
     }
 
-  cout<<max<<endl;
+    lli in=0,mn=0;
+    lli che = 0;
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i] == s)
+        {
+          mn = i+1;
+          in = in+1;
+          fla =1;
+          break;
+        }
 
+        if(arr[i] > s)
+        {
+          fla = 0;
+          while(che < i)
+          {
+            if( (arr[i]-arr[che]) == s)
+            {
+              in = che+2;
+              mn = i+1;
+              fla = 1;
+              break;
+            }
+
+            if( (arr[i]-arr[che]) < s)
+            break;
+
+            ++che;
+          }
+        }
+
+        if(fla)
+        break;
+    }
+
+    if(fla)
+    cout<<in<<" "<<mn<<endl;
+    else
+    cout<<-1<<endl;
+
+    fla = 0;
+    --t;
+  }
   return 0;
 }
