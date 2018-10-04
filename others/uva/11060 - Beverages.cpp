@@ -28,88 +28,60 @@ typedef vector<pair<int,int> > vpii;
 bool myfunction (lli i,lli j) { return (i > j); }
 int sti (string s) { stringstream con(s); int x; con >> x; return x; }
 
-stack<int>st;
-bool visited[105];
-vector<int>result;
-
-int khans(vector<int>graph[], int v,int e)
-{
-  vector<int>indegree (v,0);
-
-  vector<int>::iterator it,it2;
-  for(int u=0;u<v;u++)
-    for(it=graph[u].begin();it!=graph[u].end();it++)
-        indegree[*it]++;
-
-  priority_queue<int, vector<int>, greater<int> > q;
-  for(int i = 0; i < v; i++)
-        if (indegree[i] == 0)
-            q.push(i);
-
-  while(!q.empty())
-  {
-    int u = q.top();
-    q.pop();
-    result.push_back(u);
-
-    for(it2=graph[u].begin(); it2!= graph[u].end(); it2++)
-      if(--indegree[*it2] == 0 )
-        q.push(*it2);
-  }
-
-  return 0;
-}
-
 int main()
 {
-  SYNC
-
-  int count = 1,n;
+  int n, m, cases = 0, x, y, top, i;
+  char cmd[105], name[105][105];
 
   while(cin>>n)
   {
-    int m,i;
-    if(n == 0)
-      break;
+    if(n==0)
+    break;
 
-    map<string, int>ma;
-    map<int, string>mare;
-    vector<int>graph[105];
+    map<string, int> R;
+    vector<int> g[105];
+    int indeg[105] = {};
 
-    string s;
-    for(i=0;i<n;i++)
+    for(i = 0; i < n; i++)
     {
-      cin>>s;
-      ma[s] = i;
-      mare[i] = s;
-      visited[i] = false;
+      cin>>name[i];
+      R[name[i]] = i;
     }
 
     cin>>m;
 
-    for(i=0; i<m; i++)
+    while(m--)
     {
-      string a,b;
-      cin>>a>>b;
-      graph[ma[a]].push_back(ma[b]);
+      cin>>cmd;
+      x = R[cmd];
+      cin>>cmd;
+      y = R[cmd];
+      g[x].push_back(y);
+      indeg[y]++;
     }
 
-    khans(graph,n,m);
+    priority_queue<int, vector<int>, greater<int> > Q;
 
-    cout<<"Case #"<<count<<": Dilbert should drink beverages in this order: ";
+    for(i = 0; i < n; i++)
+      if(indeg[i] == 0)
+        Q.push(i);
 
-    for(int i=0; i<result.size();i++)
-    {
-      cout<<mare[result[i]];
+      cout<<"Case #"<<++cases<<": Dilbert should drink beverages in this order:";
 
-      if(i < result.size()-1)
-        cout<<" ";
+      while(!Q.empty())
+      {
+        top = Q.top();
+        Q.pop();
+        for(vector<int>::iterator it = g[top].begin(); it != g[top].end(); it++)
+        {
+          indeg[*it]--;
+
+          if(indeg[*it] == 0)
+          Q.push(*it);
+        }
+            cout<<" "<<name[top];
+      }
+        puts(".\n");
     }
-    cout<<".";
-
-    ++count;
-    cout<<endl;
-  }
-
-  return 0;
+    return 0;
 }
