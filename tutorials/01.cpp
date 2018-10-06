@@ -29,21 +29,35 @@ int main()
 {
   SYNC
 
-  lli i,n,q,a,b;
-  cin>>n>>q;
-  set<int> myset;
-  for(i=1;i<=q;i++)
+  int a,b,n,wt,i,j;
+  cin>>n>>wt;
+
+  vpii arr;
+
+  for(int i=0;i<n;i++)
   {
     cin>>a>>b;
-    if(a==1){ myset.insert(b); }
-    else
+    arr.push_back(make_pair(a,b));
+  }
+
+  int dp[n+1][wt+1];
+
+  for(i=0;i<=n;i++)
+  {
+    for(j=0;j<=wt;j++)
     {
-      lli val = *myset.lower_bound(b);
-      if(val < b)
-      cout<<-1<<endl;
-      else
-      cout<<val<<endl;
+      if(j == 0 || i==0)
+      {
+        dp[i][j] = 0;
+        continue;
+      }
+
+      if(arr[i-1].first <= j)
+        dp[i][j] = max( arr[i-1].second + dp[i-1][j-arr[i-1].first], dp[i-1][j]);
+        else
+        dp[i][j] = dp[i-1][j];
     }
   }
+cout<<dp[n][wt];
   return 0;
 }
