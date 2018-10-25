@@ -27,23 +27,53 @@ int sti (string s) { stringstream con(s); int x; con >> x; return x; }
 
 int main()
 {
+  SYNC
   int t;
   cin>>t;
 
   while(t>0)
   {
-    int i,n,x,y;
-    cin>>n>>x>>y;
-    int a[n],b[n];
+    int n,m;
+    cin>>n>>m;
 
-    for(i=0;i<n;i++)
-    cin>>a[i];
+    int arr[n+1][m+1];
 
-    for(i=0;i<n;i++)
-    cin>>b[i];
-    
+    int cp = 0;
+    pair<int,int>pa[n*m];
+
+    string s;
+
+    for(int i=1;i<=n;i++)
+    {
+      cin>>s;
+      for(int j=1;j<=m;j++)
+      {
+        if(s[j-1] == '1')
+        {
+            pa[cp++] = make_pair(i,j);
+        }
+      }
+    }
+
+    int d = n+m-2;
+
+    int count[d+1];
+
+    memset(count, 0, sizeof(count));
+
+    for(int i=0;i<cp;i++)
+    {
+      for(int j=i+1;j<cp;j++)
+      {
+        int val = abs(pa[i].first - pa[j].first) + abs(pa[i].second - pa[j].second);
+        count[val]++;
+      }
+    }
+
+    for(int i=1;i<=d;i++)
+    cout<<count[i]<<" ";
+
     --t;
   }
-
   return 0;
 }

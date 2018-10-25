@@ -27,21 +27,35 @@ int sti (string s) { stringstream con(s); int x; con >> x; return x; }
 
 int main()
 {
+  SYNC
   int t;
   cin>>t;
 
   while(t>0)
   {
-    int i,n,x,y;
-    cin>>n>>x>>y;
-    int a[n],b[n];
+    int n,k,i,a,count=0;
+    cin>>n>>k;
 
-    for(i=0;i<n;i++)
-    cin>>a[i];
+    vi vec;
 
-    for(i=0;i<n;i++)
-    cin>>b[i];
-    
+    for(i=1;i<=n;i++)
+    {
+      cin>>a;
+      vec.push_back(a);
+    }
+
+    sort(vec.begin(), vec.end(), myfunction);
+    vector<int>:: iterator it;
+
+    for(it=vec.begin(); it!=vec.end(); it++)
+    {
+      if(*it < vec[k-1])
+        break;
+
+        ++count;
+    }
+
+    cout<<count<<endl;
     --t;
   }
 
