@@ -25,6 +25,25 @@ typedef vector<pair<int,int> > vpii;
 int main()
 {
     SYNC
+    int t;
+    cin>>t;
 
+    while(t> 0)
+    {
+        int i,n,res = 0;
+        cin>>n;
+
+        for(i=0; i<=n; i++)
+        {
+            if(i%2 == 0)
+                res = res + 1;
+            else
+                res = res * 2;
+
+        }
+        cout<<res<<endl;
+
+        --t;
+    }
     return 0;
 }
