@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct node{
+struct node {
   int data;
   struct node *left;
   struct node *right;
@@ -12,7 +12,7 @@ struct node *head = NULL;
 
 void inorder(struct node * temp)
 {
-  if(!temp)
+  if (!temp)
   return;
 
   inorder(temp->left);

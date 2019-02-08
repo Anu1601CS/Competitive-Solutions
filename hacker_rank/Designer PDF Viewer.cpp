@@ -26,29 +26,5 @@ int main()
 {
     SYNC
 
-    string s,a;
-
-    int i;
-    int arr[30];
-
-    for(i=0;i<26;i++)
-    {
-        cin>>arr[i];
-    }
-
-    cin>>s;
-    int in,max = -1;
-    for(i=0;i<s.length();i++)
-    {
-        in = s[i] - 97;
-
-        if(arr[in] > max)
-        {
-            max = arr[in];
-        }
-    }
-
-    cout<<max*s.length()<<endl;
-
     return 0;
 }
