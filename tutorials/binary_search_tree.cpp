@@ -40,6 +40,25 @@ void preorder(struct node * temp)
   inorder(temp->right);
 }
 
+
+bool checkContinuous(struct node *root)
+{
+    if (root == NULL)
+        return true;
+
+    if (root->left == NULL && root->left == NULL)
+        return true;
+
+    if (root->left == NULL)
+        return ((abs(root->data - root->right->data) == 1) && checkContinuous(root->right));
+
+    if (root->right == NULL)
+        return ((abs(root->data - root->left->data) == 1) && checkContinuous(root->left));
+
+    return (abs(root->data - root->left->data) == 1) && (abs(root->data - root->right->data) == 1) && checkContinuous(root->left) &&
+           checkContinuous(root->right);
+}
+
 void show()
 {
   queue<struct node*> q;
