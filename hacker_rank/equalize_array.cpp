@@ -13,27 +13,23 @@ typedef long long int lli;
 
 int main()
 {
-    SYNC
+    SYNC int n;
+    cin >> n;
 
-    string s;
-    cin>>s;
+    map<int, int> myMap;
 
-    int c = 0;
-
-    for(int i=0; i< s.length()-3; i = i + 2)
+    int max = 0;
+    for (int i = 0; i < n; i++)
     {
-        if(s[i] != 'S')
-            c++;
-        
-        if(s[i+1] != 'O')
-            c++;
-        
-        if(s[i+2] != 'S')
-            c++;
+        int a;
+        cin >> a;
+        myMap[a]++;
+
+        if (max < myMap[a])
+            max = myMap[a];
     }
 
-    cout<<c<<endl;
-
+    cout<<n - max<<endl;
 
     return 0;
 }
