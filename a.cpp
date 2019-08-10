@@ -15,6 +15,7 @@ int main()
 {
     SYNC
     int n;
+    vector<int> myVec;
     cin>>n;
 
     int arr[n];
