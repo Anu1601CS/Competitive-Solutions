@@ -1,50 +1,62 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define SYNC                          \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(0);                       \
-    cout.tie(0);
-#define inf 0x3f3f3f3f
-#define INF 1000111000111000111LL
-#define mod 1000000007s
-#define all(c) c.begin(), c.end()
+// C++ program to find n'th term in look and say 
+// sequence 
+#include <bits/stdc++.h> 
+using namespace std; 
 
-typedef long long int lli;
+// Returns n'th term in look-and-say sequence 
+string countnndSay(int n) 
+{ 
+	// Base cases 
+	if (n == 1)	 return "1"; 
+	if (n == 2)	 return "11"; 
 
-int main()
-{
-    SYNC
-    int n;
-    vector<int> myVec;
-    cin>>n;
+	// Find n'th term by generating all terms from 3 to 
+	// n-1. Every term is generated using previous term 
+	string str = "11"; // Initialize previous term 
+	for (int i = 3; i<=n; i++) 
+	{ 
+		// In below for loop, previous character 
+		// is processed in current iteration. That 
+		// is why a dummy character is added to make 
+		// sure that loop runs one extra iteration. 
+		str += '$'; 
+		int len = str.length(); 
 
-    int arr[n];
-    for(int i=0;i<n;i++) 
-        cin>>arr[i];
+		int cnt = 1; // Initialize count of matching chars 
+		string tmp = ""; // Initialize i'th term in series 
 
+		// Process previous term to find the next term 
+		for (int j = 1; j < len; j++) 
+		{ 
+			// If current character does't match 
+			if (str[j] != str[j-1]) 
+			{ 
+				// Append count of str[j-1] to temp 
+				tmp += cnt + '0'; 
 
-    int t = n;    
-    
-    while (t--)
-    {
-        int op = 0;
-        auto min = upper_bound(arr, arr+n, 0);
-        
-        cout<<*min<<endl;
-        for(int i=0;i<n;i++)    
-        {
-            if(arr[i] > 0) {
-                ++op;
-                arr[i] = arr[i] - *min;
-            cout<<arr[i]<<" ";
-            }
-        }
+				// Append str[j-1] 
+				tmp += str[j-1]; 
 
-        cout<<" "<<op<<endl;
+				// Reset count 
+				cnt = 1; 
+			} 
 
-        // cout<<op<<endl;
-    }
-        
+			// If matches, then increment count of matching 
+			// characters 
+			else cnt++; 
+		} 
 
-    return 0;
-}
+		// Update str 
+		str = tmp; 
+	} 
+
+	return str; 
+} 
+
+// Driver program 
+int main() 
+{ 
+	int N = 3; 
+	cout << countnndSay(N) << endl; 
+	return 0; 
+} 
