@@ -1,62 +1,60 @@
-// C++ program to find n'th term in look and say 
-// sequence 
-#include <bits/stdc++.h> 
-using namespace std; 
+#include <bits/stdc++.h>
+using namespace std;
 
-// Returns n'th term in look-and-say sequence 
-string countnndSay(int n) 
-{ 
-	// Base cases 
-	if (n == 1)	 return "1"; 
-	if (n == 2)	 return "11"; 
+void constructSegmentTree(int arr[], int segment[], int low, int high, int pos)
+{
+	if (low == high) {
+		segment[pos] = arr[low];
+		return;
+	}
 
-	// Find n'th term by generating all terms from 3 to 
-	// n-1. Every term is generated using previous term 
-	string str = "11"; // Initialize previous term 
-	for (int i = 3; i<=n; i++) 
-	{ 
-		// In below for loop, previous character 
-		// is processed in current iteration. That 
-		// is why a dummy character is added to make 
-		// sure that loop runs one extra iteration. 
-		str += '$'; 
-		int len = str.length(); 
+	int mid = (low + high) / 2;
 
-		int cnt = 1; // Initialize count of matching chars 
-		string tmp = ""; // Initialize i'th term in series 
+	constructSegmentTree(arr, segment, low, mid, (2 * pos) + 1);
+	constructSegmentTree(arr, segment, mid + 1, high, (2 * pos) + 2);
 
-		// Process previous term to find the next term 
-		for (int j = 1; j < len; j++) 
-		{ 
-			// If current character does't match 
-			if (str[j] != str[j-1]) 
-			{ 
-				// Append count of str[j-1] to temp 
-				tmp += cnt + '0'; 
+	segment[pos] = min(segment[(2 * pos) + 1], segment[(2 * pos) + 2]);
+}
 
-				// Append str[j-1] 
-				tmp += str[j-1]; 
+int minRangeQuery(int segment[], int fLow, int fHigh, int low, int high, int pos)
+{
 
-				// Reset count 
-				cnt = 1; 
-			} 
+	if( high  <= fHigh  && low >= fLow  )
+	return segment[pos];
 
-			// If matches, then increment count of matching 
-			// characters 
-			else cnt++; 
-		} 
+	if( high < fLow || low > fHigh)
+	return 999999;
 
-		// Update str 
-		str = tmp; 
-	} 
+	int mid = ( low + high ) / 2; 
 
-	return str; 
-} 
+	return min( minRangeQuery(segment, fLow, fHigh, low, mid, (2*pos) + 1), minRangeQuery(segment, fLow, fHigh, mid+1, high, (2*pos) + 2));
+}
 
-// Driver program 
-int main() 
-{ 
-	int N = 3; 
-	cout << countnndSay(N) << endl; 
-	return 0; 
-} 
+int main()
+{
+	int n;
+	cin >> n;
+
+	int arr[n];
+	for (int i = 0; i < n; i++)
+		cin >> arr[i];
+	
+	int segmentSize;
+	if(n % 2 == 0) 
+	 segmentSize = 2*n - 1;
+	else 
+	 segmentSize = 2*pow(2, ceil(log2(n))) - 1;
+	
+	int segment[segmentSize];
+	for (int i = 0; i < segmentSize; i++)
+		segment[i] = 99999;
+
+	constructSegmentTree(arr, segment, 0, n-1, 0);
+
+	int l,h;
+	cin>>l>>h;
+
+	cout<<minRangeQuery(segment,l, h, 0,segmentSize-1, 0);
+
+		return 0;
+}
