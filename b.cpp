@@ -14,33 +14,32 @@ typedef long long int lli;
 
 int main()
 {
-    SYNC int n;
+    SYNC
 
-    cin >> n;
+        int t;
+    cin >> t;
 
-    int arr[n];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    stack<int> myStack;
-
-    myStack.push(arr[0]);
-
-    for (int i = 1; i < n; i++)
+    while (t--)
     {
-        while (!myStack.empty() && myStack.top() < arr[i])
+        int n;
+        cin >> n;
+
+        int arr[n];
+        for (int i = 0; i < n; i++)
+            cin >> arr[i];
+
+        int count = 1;
+        
+        int m = arr[0];
+        for (int i = 1; i < n; i++)
         {
-            cout << myStack.top() << "-->" << arr[i] << endl;
-            myStack.pop();
+            // int m = *min_element(arr + max(0, i - 5), arr + (i - 1));
+
+            if (m > arr[i])
+                count++;
         }
 
-        myStack.push(arr[i]);
-    }
-
-    while (!myStack.empty())
-    {
-        cout << myStack.top() << "-->" << "-1"<< endl;
-        myStack.pop();
+        cout << count << endl;
     }
 
     return 0;
