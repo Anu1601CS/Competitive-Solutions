@@ -14,22 +14,9 @@ using namespace std;
 
 typedef long long int lli;
 
-int main()
-{
-    SYNC lli n;
 
-    cin >> n;
-    vector< pair<lli, lli> > problems;
+int find(vector< pair<lli, lli> > problems){
 
-    for (lli i = 0; i < n; i++)
-    {
-        lli a, b;
-
-        cin >> a >> b;
-        problems.push_back(make_pair(a, b));
-    }
-
-    sort(problems.begin(), problems.end());
 
     vector<lli> fromUp;
     vector<lli> fromDown;
@@ -61,7 +48,37 @@ int main()
     for(lli i=0; i < fromUp.size() - 1; i++) 
         res = max(res, fromUp[i] + fromDown[fromDown.size()- (i + 2)]);
 
-    cout<<res<<endl;
+    return res;
+}
+
+bool func(pair<lli, lli> a, pair<lli, lli> b){
+    return a.second < b.second;
+}
+
+int main()
+{
+    SYNC lli n;
+
+    cin >> n;
+    vector< pair<lli, lli> > problems;
+
+    for (lli i = 0; i < n; i++)
+    {
+        lli a, b;
+
+        cin >> a >> b;
+        problems.push_back(make_pair(a, b));
+    }
+
+    sort(problems.begin(), problems.end());
+
+    lli ans1 = find(problems);
+    
+    sort(problems.begin(), problems.end(), func);
+
+    lli ans2 = find(problems);
+
+    cout<<max(ans1, ans2)<<endl;
 
     return 0;
 }
