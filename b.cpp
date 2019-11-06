@@ -1,68 +1,67 @@
-// CPP program to find all subsets by backtracking.
 #include <bits/stdc++.h>
+#include <string>
 using namespace std;
+#define SYNC                          \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(0);                       \
+    cout.tie(0);
+#define inf 0x3f3f3f3f
+#define INF 1000111000111000111LL
+#define mod 1000000007
+#define pi acos(-1.0)
+#define eps 1e-8
+#define endl '\n'
 
-// In the array A at every step we have two
-// choices for each element either we can
-// ignore the element or we can include the
-// element in our subset
-void subsetsUtil(vector<int> &A, vector< vector<int> > &res,
-                 vector<int> &subset, int index)
-{
-    res.push_back(subset);
-    for (int i = index; i < A.size(); i++)
-    {
+typedef long long int lli;
 
-        // include the A[i] in subset.
-        subset.push_back(A[i]);
-
-        // move onto the next element.
-        subsetsUtil(A, res, subset, i + 1);
-
-        // exclude the A[i] from subset and triggers
-        // backtracking.
-        subset.pop_back();
-    }
-
-    return;
-}
-
-// below function returns the subsets of vector A.
-vector< vector<int> > subsets(vector<int> &A)
-{
-    vector<int> subset;
-    vector< vector<int> >  res;
-
-    // keeps track of current element in vector A;
-    int index = 0;
-    subsetsUtil(A, res, subset, index);
-
-    return res;
-}
-
-// Driver Code.
 int main()
 {
-    // find the subsets of below vector.
-    vector<int> array;
+    SYNC lli n;
 
-    array.push_back(1);
-    array.push_back(2);
-    array.push_back(3);
+    cin >> n;
+    vector< pair<lli, lli> > problems;
 
-    // res will store all subsets.
-    // O(2 ^ (number of elements inside array))
-    // because at every step we have two choices
-    // either include or ignore.
-    vector< vector<int> > res = subsets(array);
-
-    // Print result
-    for (int i = 0; i < res.size(); i++)
+    for (lli i = 0; i < n; i++)
     {
-        for (int j = 0; j < res[i].size(); j++)
-            cout << res[i][j] << " ";
-        cout << endl;
+        lli a, b;
+
+        cin >> a >> b;
+        problems.push_back(make_pair(a, b));
     }
+
+    sort(problems.begin(), problems.end());
+
+    vector<lli> fromUp;
+    vector<lli> fromDown;
+
+    vector< pair<lli, lli> >::iterator it;
+
+    lli lb = -1;
+    lli ub = INF;
+    for (it = problems.begin(); it != problems.end(); it++)
+    {
+        lb = max(lb, it->first);
+        ub = min(ub, it->second);
+
+        fromUp.push_back( (ub - lb) + 1 );
+    }
+    
+    lb = -1;
+    ub = INF;
+    for (lli i = problems.size() - 1; i >= 0 ; i--)
+    {
+        lb = max(lb, problems[i].first);
+        ub = min(ub, problems[i].second);
+
+        fromDown.push_back( (ub - lb) + 1 );
+    }
+
+    lli res = -1;
+
+    for(lli i=0; i < fromUp.size() - 1; i++) 
+        res = max(res, fromUp[i] + fromDown[fromDown.size()- (i + 2)]);
+
+    cout<<res<<endl;
 
     return 0;
 }

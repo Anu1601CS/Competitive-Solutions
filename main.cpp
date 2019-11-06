@@ -1,14 +1,8 @@
-
-#include<iostream.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-
-// typedef long long int lli;
-
 
 int main()
 {
-	cin>>a;
-	cout<<a<<endl;
-
+	vector<int> adj[100];
+	adj[0].push_back(1);
 }
