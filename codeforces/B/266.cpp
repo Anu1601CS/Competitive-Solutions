@@ -14,15 +14,26 @@ using namespace std;
 
 typedef long long int lli;
 
-lli fac(lli n)
-{
-    if (n <= 1)
-        return 1;
-
-    return (n * fac(n - 1)) % mod;
-}
-
 int main()
 {
+    int n, t;
+
+    cin >> n >> t;
+    string s;
+    cin >> s;
+
+    for (int i = 0; i < t; i++)
+    {
+        for (int j = 0; j < n - 1; j++)
+        {
+            if (s[j] == 'B' && s[j + 1] == 'G')
+            {
+                swap(s[j], s[j + 1]);
+                j++;
+            }
+        }
+    }
+
+    cout << s << endl;
     return 0;
 }
