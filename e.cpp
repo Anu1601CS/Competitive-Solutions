@@ -14,28 +14,7 @@ using namespace std;
 
 typedef long long int lli;
 
-int find(int a, int b, int c)
-{
-    if (a == b)
-        return c;
-
-    cout << a << " " << b << endl;
-
-    return min(find(a + c, b, c + 1), find(a, b + c, c + 1));
-}
-
 int main()
 {
-    int t;
-    cin >> t;
-
-    while (t--)
-    {
-        int a, b;
-        cin >> a >> b;
-
-        cout << find(a, b, 1) << endl;
-    }
-
     return 0;
 }
