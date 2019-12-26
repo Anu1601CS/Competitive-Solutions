@@ -13,10 +13,30 @@ using namespace std;
 #define endl '\n'
 
 typedef long long int lli;
-typedef unsigned long long int ulli;
 
 int main()
 {
+    int n,m;
+    cin>>n>>m;
+    vector<int>h(m);
+    
+    for(int &x : h) {
+        cin>>x;
+    }
+
+    lli cur = 1, i=0, time = 0;
+    while (i<m) {
+        if(h[i] >= cur) {
+            time = time + abs(h[i] - cur);
+        } else {
+            time = time + abs(n - cur) + 1;
+            time = time + abs(h[i] - 1);
+        }
+        cur = h[i];
+        i++;
+    }
+    
+    cout<<time<<endl;
 
     return 0;
 }
