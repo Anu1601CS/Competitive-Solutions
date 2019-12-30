@@ -17,6 +17,6 @@ typedef unsigned long long int ulli;
 
 int main()
 {
-
+    
     return 0;
 }
