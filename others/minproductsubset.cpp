@@ -20,27 +20,38 @@ int main()
 	cin>>n;
 	std::vector<int> v;
 	for(int i=0;i<n;i++) {
-		int x;
-		cin>>x;
-		v.push_back(x);
+		int a;
+		cin>>a;
+		v.push_back(a);
 	}
 
-	sort(v.begin(), v.end());
+	sort(v.begin(),v.end());
 
-	int k;
-	cin>>k;
+	int min = v[0];
 
-	for(int i=0; i<k; i++) {
-		v[i]= -v[i];
+	for(int i=1; i<n-1; i++) {
+		if(min < 0) {
+
+			if(v[i] > 0) {
+				min =  min * v[i];
+			} else  if(v[i] < 0 && v[i+1] < 0) {
+				min = min * v[i];
+			}
+
+		} else if(v[i] < 0) {
+			min = min * v[i];
+		} else {
+			break;
+		}
 	}
 
-	int sum = 0;
-	for(auto x: v) {
-		cout<<x<<endl;
-		sum = sum + x;
+	if(min < 0 && v[n-1] > 0) {
+		min = min * v[n-1];
 	}
 
-	cout<<sum<<endl;
+	cout<<min<<endl;
 
+
+	
 	return 0;
 }

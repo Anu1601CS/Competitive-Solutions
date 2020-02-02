@@ -16,31 +16,39 @@ typedef long long int lli;
 
 int main()
 {
-	int n;
+	lli n;
 	cin>>n;
-	std::vector<int> v;
+	vector<lli> v;
 	for(int i=0;i<n;i++) {
 		int x;
 		cin>>x;
 		v.push_back(x);
 	}
 
-	sort(v.begin(), v.end());
+	lli c=0;
+	lli pos;
 
-	int k;
-	cin>>k;
+	for(lli i = v.size()-1; i>=0; i--){
+		if(c>2) break;
 
-	for(int i=0; i<k; i++) {
-		v[i]= -v[i];
+		if(v[i] < v[i-1]) {
+			++c;
+			pos = i;
+		} 
+	}	
+
+	if(c == 1){ 
+		if(v[v.size()-1] <= v[0]) {
+			cout<<v.size()-pos<<endl; 
+		} else {
+			cout<<-1<<endl;
+		}
+	} else if(c==0) {
+		cout<<c<<endl;
+	} else {
+		cout<<-1<<endl;
 	}
 
-	int sum = 0;
-	for(auto x: v) {
-		cout<<x<<endl;
-		sum = sum + x;
-	}
-
-	cout<<sum<<endl;
 
 	return 0;
 }
