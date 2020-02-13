@@ -60,32 +60,47 @@ struct node* insert(int data, struct node **head)
     return *head;
 }
 
-void inorder(struct node *p){
+void getSumUtil(struct node *p, int sum, int &maxSum) {
+    
+    if(p != NULL) 
+    {
+        sum = sum + p->data;
+    
+        if(p->left == NULL && p->right == NULL) {
+            maxSum = max(maxSum, sum);
+        }
 
-    if(p == NULL)
-        return;
+        getSumUtil(p->left, sum, maxSum);
+        getSumUtil(p->right, sum, maxSum);  
+    }
 
-    inorder(p->left);
-    cout<<p->data<<" ";
-    inorder(p->right);    
+}
+
+
+int getDiameter(struct node *p, int &dia) {
+
+    if(p== NULL)
+        return 0;
+
+    if(p->left == NULL && p->right == NULL) 
+        return 1;
+
+    int left = getDiameter(p->left, dia);
+    int right = getDiameter(p->right, dia);
+
+    if(p->left && p->right) {
+        dia = max(dia, left + right + 1);
+        return max(left, right) + 1;
+    } else if(p->left) {
+        return left + 1; 
+    }   else {
+        return right + 1;
+    }
+
 }
 
 int main()
 {
-    struct node *head = NULL;
-
-    int n;
-    cin >> n;
-
-    for(int i=0;i<n;i++) {
-        int a;
-        cin>>a;
-        insert(a, &head);
-    }
-
-    std::vector<int> v1;
-
-    inorder(head);
-
+    
     return 0;
 }

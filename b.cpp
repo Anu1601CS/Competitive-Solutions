@@ -16,31 +16,12 @@ typedef long long int lli;
 
 int main()
 {
-	int n;
-	cin>>n;
-	std::vector<int> v;
-	for(int i=0;i<n;i++) {
-		int x;
-		cin>>x;
-		v.push_back(x);
-	}
 
-	sort(v.begin(), v.end());
+	vector<int> stack = {INT_MAX};
 
-	int k;
-	cin>>k;
+	// for(auto x : stack) {
+		cout<<stack.back()<<endl;
+	// }
 
-	for(int i=0; i<k; i++) {
-		v[i]= -v[i];
-	}
-
-	int sum = 0;
-	for(auto x: v) {
-		cout<<x<<endl;
-		sum = sum + x;
-	}
-
-	cout<<sum<<endl;
-
-	return 0;
+  return 0;
 }

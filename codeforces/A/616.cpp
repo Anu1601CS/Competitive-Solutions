@@ -14,43 +14,31 @@ using namespace std;
 
 typedef long long int lli;
 
-class Hello 
-{
-
-	public:
-
-		int a,b;
-
-		int sub();
-		
-		Hello() {
-			cout<<"Hello"<<endl;
-		}
-
-		Hello(string s) {
-			cout<<"Hello"<<s<<endl;
-		}
-
-		int add()
-		{
-			return a+b;
-		}
-
-};
-
-int Hello::sub(){
-	return a-b;
-}
-
 int main()
 {
-	Hello obj1("World");
 
-	obj1.a = 1;
-	obj1.b = 2;
+	int t;
+	cin>>t;
 
-	cout<<obj1.add();
-	cout<<obj1.sub();
+	while(t--) {
 
-    return 0;
+		int n;
+		cin>>n;
+		string s;
+		cin>>s;
+
+		int sum = 0;
+		vector<int>myVec;
+
+		for(int i=0;i<n;i++) {
+				if((s[i] - '0') % 2 == 1) myVec.push_back(s[i]-'0');
+		}
+
+		if(myVec.size()< 2) cout<<-1<<endl;
+		else 
+			cout<<myVec[0]<<myVec[1]<<endl;
+
+	}
+	
+	return 0;
 }

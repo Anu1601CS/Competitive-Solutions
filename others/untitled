@@ -1,0 +1,94 @@
+
+// Sample code to perform I/O:
+
+#include <iostream>
+#include <bits/stdc++.h>
+#define SYNC  \
+        ios_base::sync_with_stdio(false); \
+            cin.tie(0); \
+            cout.tie(0);
+
+using namespace std;
+
+int main() {
+    SYNC
+    
+    int num_machines;
+    cin>>num_machines;
+    
+    vector<string>vec_machines;
+    unordered_map<string, bool>active_machines;
+    
+    for(int i=0;i<num_machines; i++) {
+        
+        string a;
+        cin>>a;
+        vec_machines.push_back(a);
+        active_machines[a] = true;
+    }
+    
+    int num_reverse;
+    cin>>num_reverse;
+    
+    unordered_map<string, vector<string>>map_reverse;
+    
+    for(int i=0; i<num_reverse; i++) {
+        string p;
+        int n;
+        
+        cin>>p;
+        cin>>n;
+        
+        for(int j=0; j<n; j++) {
+            string ip;
+            cin>>ip;
+            map_reverse[p].push_back(ip);
+        }
+    }
+    
+    
+    int num_query;
+    cin>>num_query;
+    
+    // for(auto x: map_reverse) {
+    //     cout<<x.second[0];
+    // }
+    
+    unordered_map<string, vector<string>>logs;
+
+
+    for(int k=0; k<num_query; k++) {
+        
+        string path;
+        cin>>path;
+        
+        string md = path.substr(17, 12);
+        string mu = path.substr(17, 10);
+        
+        if(md == "machine_down") {
+            string dip =path.substr(33, 7);
+            active_machines[dip] = false;    
+            // cout<<dip<<endl;
+            
+        } else if(mu == "machine_up") {
+            string dup =path.substr(31, 7);
+            // cout<<dup<<endl;
+            active_machines[dup] = false;
+            
+        } else {
+            string proxy = path.substr(0, 16);
+        
+            for(int i=0; map_reverse[proxy].size(); i++) {
+                
+                string ip = map_reverse[proxy][i];
+                
+                if(active_machines[ip] == true) {
+                    
+                }
+            }
+        
+        }
+    }
+    
+    
+}
