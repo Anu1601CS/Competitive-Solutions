@@ -12,45 +12,44 @@ using namespace std;
 #define eps 1e-8
 #define endl '\n'
 
-typedef long long int lli;
+typedef pair<int, int> ii;
+typedef pair<int, ii> iii;
+typedef vector<ii> vii;
+typedef vector<int> vi;
+typedef long long ll;
+typedef long double ld;
+typedef vector<ll> vll;
+typedef pair<ll,ll> lll;
 
-class Hello 
-{
+#define FOR(i,a,b) for(long long i = (long long)(a); i < (long long)(b); i++)
+#define RFOR(i,a,b) for(long long i = (long long)(a); i >= (long long)(b); i--)
+#define ull unsigned long long
+#define deb(x )     cerr << #x << " = "<< x << endl;
+#define coud(a,d) cout << fixed << showpoint << setprecision(d) << a;
+#define ff first
+#define ss second
+#define mp make_pair
+#define pb push_back
+#define fill(x, y) memset(x, y, sizeof(y))
+#define all(x) (x).begin(), (x).end()
+#define bitcount(x) __builtin_popcount(x)
+#define cps CLOCKS_PER_SEC
+#define verify(x) if(x >= MOD) x -= MOD;
 
-	public:
+inline void debug_vi(vi a) {FOR(i, 0, a.size()) cout<<a[i]<<" ";}
+inline void debug_vll(vll a) {FOR(i, 0, a.size()) cout<<a[i]<<" ";}
+inline void print_case(int tn) {cout<<"Case #"<<tn<<": ";}
 
-		int a,b;
+template<typename T>
+using minpq = priority_queue<T, vector<T>, greater<T>>;
 
-		int sub();
-		
-		Hello() {
-			cout<<"Hello"<<endl;
-		}
-
-		Hello(string s) {
-			cout<<"Hello"<<s<<endl;
-		}
-
-		int add()
-		{
-			return a+b;
-		}
-
-};
-
-int Hello::sub(){
-	return a-b;
-}
+template<typename T>
+using maxpq = priority_queue<T>;
+/* <--------------------------------------------------------------------------------> */
 
 int main()
 {
-	Hello obj1("World");
+	SYNC
 
-	obj1.a = 1;
-	obj1.b = 2;
-
-	cout<<obj1.add();
-	cout<<obj1.sub();
-
-    return 0;
+  return 0;
 }
