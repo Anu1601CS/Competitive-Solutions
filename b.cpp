@@ -17,11 +17,5 @@ typedef long long int lli;
 int main()
 {
 
-	vector<int> stack = {INT_MAX};
-
-	// for(auto x : stack) {
-		cout<<stack.back()<<endl;
-	// }
-
   return 0;
 }
