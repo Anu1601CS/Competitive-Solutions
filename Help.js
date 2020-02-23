@@ -5,6 +5,7 @@ function helper() {
   stack.push(5); // stack is now [2, 5]
   var i = stack.pop(); // stack is now [2]
   alert(i); // displays 5
+  
 
   // Queue
   var queue = [];
@@ -54,11 +55,11 @@ function helper() {
   set.add('red');
 
   set.has('red');
-  true;
+  // true;
   set.delete('red');
-  true;
+  // true;
   set.has('red');
-  false;
+  // false;
   // Determining the size of a Set and clearing it:
 
   let set = new Set();
