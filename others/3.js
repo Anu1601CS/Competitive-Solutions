@@ -21,7 +21,7 @@ function cal(N, K){
 
 function solution(N, K) {
   
-  if(K == 0){
+  if(K == 0) {
       return N-1;
   }
   
