@@ -1,0 +1,24 @@
+Implement DES_modified cipher: 
+
+
+1. Each character of plain text converted into binary format. Every time we take 64 bits from that and give as input to DES algorithm, then it processed through 16 rounds and then converted to cipher text
+
+2. Initial Permutation: 64 bit plain text goes under initial permutation and then given to round 1. Since initial permutation step receiving 64 bits, it contains an 1×64 matrix which contains numbers from 1 to 64 but in shuffled order. After that, we arrange our original 64 bit text in the order mentioned in that matrix.
+
+After initial permutation, 64 bit text passed through 16 rounds. In each round it processed with 48 bit key. That means we need total 16 sub keys, one for each round.
+
+3. Substitution boxes [S box]: In DES algorithm we have 8 S boxes. Input for S box is 48bit. And output from S box is 32 bit. The input 48 bit will be divided equally to 8 s boxes from s1, s2, … s8. So each s box will get 48/8= 6 bits as input. This Each S box reduce 6 bits to 4 bits. i.e input for each S box is 6 bits and output is 4 bits. Finally, 8*4 = 32 bit. Which is final output of S box operation.
+
+4. 32 bit swap: After completion of 16 rounds, final 64 bits divided into two 32 bit parts and they swap each other.
+
+5. Inverse Initial Permutation: Here also a matrix will be there, in which bits are just shuffled. No adding or subtracting bits.
+
+How to run: 
+
+g++ DES.cpp
+
+./a.out
+Enter Plain text: 
+aaa
+Decrypted output is
+1100001001101011111101110010001001111001011001010001000110100101

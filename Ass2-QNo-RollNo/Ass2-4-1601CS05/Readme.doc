@@ -1,0 +1,26 @@
+Hill Cipher:
+
+Encryption: The given message string and key string is represented in the form of matrix. Then key and message matrix are multiplied. Finally modulo 26 is taken for each element of matrix obtained by multiplication. The key matrix that we take here should be invertible, otherwise decryption will not be possible.
+
+Decryption: The encrypted message matrix is multiplied by the inverse of key matrix and finally its modulo 26 is taken to get the original message.
+
+How to run:
+g++ Hill_cipher.cpp
+
+./a.out
+Enter 3x3 matrix for key (It should be inversible):
+6 24 1
+13 16 10
+20 17 15
+
+Enter a 3 letter string: lsl
+
+Encrypted string is: pvp
+
+Inverse Matrix is:
+0.15873 -0.777778 0.507937 
+0.0113379 0.15873 -0.106576 
+-0.22449 0.857143 -0.489796 
+
+Decrypted string is: lsl
+

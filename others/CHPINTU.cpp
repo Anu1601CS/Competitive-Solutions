@@ -24,7 +24,7 @@ typedef pair<ll,ll> lll;
 #define FOR(i,a,b) for(long long i = (long long)(a); i < (long long)(b); i++)
 #define RFOR(i,a,b) for(long long i = (long long)(a); i >= (long long)(b); i--)
 #define ull unsigned long long
-#define deb(x)     cerr << #x << " = "<< x << endl;
+#define deb(x )     cerr << #x << " = "<< x << endl;
 #define coud(a,d) cout << fixed << showpoint << setprecision(d) << a;
 #define ff first
 #define ss second
@@ -50,6 +50,44 @@ using maxpq = priority_queue<T>;
 int main()
 {
 	SYNC
+
+	int t;
+	cin>>t;
+
+	while(t--){
+		int n,m;
+		cin>>m>>n;
+
+		minpq <int> res;
+		unordered_map<int,int>myMap;
+		vector<int>f;
+		for(int i=0; i<m; i++) {
+			int a;
+			cin>>a;
+			f.push_back(a); 
+		}
+
+		vector<int>p;
+		for(int i=0; i<m; i++) {
+			int a;
+			cin>>a;
+			p.push_back(a); 
+		}
+
+		int min = INT_MAX;
+		for(int i=0; i<m; i++){
+			myMap[f[i]] = myMap[f[i]] + p[i];
+		}
+		
+		for(int i=0; i<m; i++){
+			if(min > myMap[f[i]]) {
+				min = myMap[f[i]];
+			}
+		}
+
+		cout<<min<<endl;
+
+	}
 
   return 0;
 }
